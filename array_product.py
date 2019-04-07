@@ -20,18 +20,16 @@ def array_product(input):
             if i != j:
                 product *= input[j]
         result.append(product)
-
-    print(result)
     return result
 
-# use division, but if one of the element is 0 then everything falls aport
+# use division, but if one of the element is 0 then everything falls apart
 # time complexity is O(n)
 def array_product_division(input):
     product = 1
     for i in input:
         product *= i
 
-    return [product/i for i in input]
+    return [int(product / i) for i in input]
 
 input = [1, 2, 3, 4, 5]
 ret = array_product(input)
