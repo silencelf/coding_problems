@@ -24,7 +24,7 @@ def array_product(input):
     print(result)
     return result
 
-# use division, but if one of the element is 0 then everythin falls aport
+# use division, but if one of the element is 0 then everything falls aport
 # time complexity is O(n)
 def array_product_division(input):
     product = 1
