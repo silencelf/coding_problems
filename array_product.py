@@ -28,8 +28,10 @@ def array_product_division(input):
     product = 1
     for i in input:
         product *= i
-
     return [int(product / i) for i in input]
+
+def array_product_recursive(input):
+    pass
 
 input = [1, 2, 3, 4, 5]
 ret = array_product(input)
