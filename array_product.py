@@ -9,6 +9,7 @@ For example, if our input was [1, 2, 3, 4, 5], the expected output would be
 
 Follow-up: what if you can't use division?
 """
+import math
 
 # brute force solution
 # time complexity is O(n*n)
@@ -30,12 +31,19 @@ def array_product_division(input):
         product *= i
     return [int(product / i) for i in input]
 
-def array_product_recursive(input):
-    pass
+def array_product_log(input):
+    EPS = 1e-9
+    logs = [math.log10(n) for n in input]
+    total = sum(logs)
+    result = [int(EPS + pow(10, (total - n))) for n in logs]
+    return result
 
 input = [1, 2, 3, 4, 5]
+result = [120, 60, 40, 30, 24]
 ret = array_product(input)
-print('result is : %a' % ret)
+print('brute force result is : %a' % ret)
 ret = array_product_division(input)
-print('result is : %a' % ret)
-print('result should be : %a' % [120, 60, 40, 30, 24])
+print('divition result is : %a' % ret)
+ret = array_product_log(input)
+print('log result is : %a' % ret)
+print('result should be : %a' % result)
