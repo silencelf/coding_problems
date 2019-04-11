@@ -1,0 +1,40 @@
+* TODO learn emacs
+* TODO learn org-mode
+* TODO evil mode ?
+
+* Top level headline
+** Second level
+*** Third level
+    some text
+*** Another third level component 
+** What ? 
+* Another top level headline
+
+* Lord of the Rings
+  My favorite scenes are (in this order)
+1) The attack of the Rohirrim
+2) Eowyn's fight with the witch king
+   + this was
+   + I really like Miranda Otto.
+3) Peter Jackson being shot be Legolas
+   - on DVD only
+   He makes a really funny face when it happens.
+
+#+BEGIN_EXAMPLE
+    Some example from a text file
+#+END_EXAMPLE
+
+#+BEGIN_SRC emacs-lisp
+    (defun org-xor (a b)
+	"Exclusive or."
+	(if a (not b) b))
+#+END_SRC
+
+#+RESULTS:
+: org-xor
+
+#+CALL: org-xor(1 1)
+
+#+BEGIN_SRC python
+print('hello')
+#+END_SRC
