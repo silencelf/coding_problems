@@ -31,6 +31,7 @@ def array_product_division(input):
         product *= i
     return [int(product / i) for i in input]
 
+# this is kinda cheating, you can't apply log to common objects
 def array_product_log(input):
     EPS = 1e-9
     logs = [math.log10(n) for n in input]
