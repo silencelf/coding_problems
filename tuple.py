@@ -13,7 +13,8 @@ def cons(a, b):
 Implement car and cdr.
 """
 
-" is this function correct ?
+""" is this function correct ?
+"""
 def cons(a, b):
     def pair(f):
         return f(a, b)
