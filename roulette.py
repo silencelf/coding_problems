@@ -17,7 +17,7 @@ class FairRoulette():
 
 def playRoulette(game, numSpins, pocket, bet, toPrint):
     totPocket = 0
-    for i in range(numSpins):
+    for _ in range(numSpins):
         game.spin()
         totPocket += game.betPocket(pocket, bet)
     if toPrint:
