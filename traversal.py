@@ -49,3 +49,13 @@ def level_order_traversal(node):
 print('level order traversal')
 arr = level_order_traversal(root)
 print(arr)
+
+def maxDepth(root):
+  """
+  buttom up, get the max depth of a tree
+  """
+  if not root:
+      return 0
+  left = maxDepth(root.left)
+  right = maxDepth(root.right)
+  return max(left, right) + 1
