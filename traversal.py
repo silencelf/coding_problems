@@ -59,3 +59,35 @@ def maxDepth(root):
   left = maxDepth(root.left)
   right = maxDepth(root.right)
   return max(left, right) + 1
+
+
+def isSymmetric(root):
+  if not root:
+    return True
+  list = [root.left, root.right]
+  while len(list):
+    item = list.pop(0)
+    otherItem = list.pop(0)
+    if not item and not otherItem:
+        continue
+    if not item or not otherItem:
+        return False
+    if item.val != otherItem.val:
+        return False
+    list += [item.left, otherItem.right, item.right, otherItem.left]
+
+  return True
+
+def isSymmetric_rec(root):
+  if not root:
+    return True
+  return isMirror(root.left, root.right)
+
+def isMirror(item1, item2):
+  if not item1 and not item2:
+      return True
+  if not item1 or not item2:
+      return False
+  return (item1.val == item2.val and
+      self.isMirror(item1.left, item2.right) and
+      self.isMirror(item1.right, item2.left))
