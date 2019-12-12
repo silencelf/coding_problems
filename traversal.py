@@ -1,4 +1,4 @@
-#! /usr/local/bin/python33
+#! /usr/local/bin/python3
 
 class Node:
   def __init__(self, val, left = None, right = None):
@@ -89,5 +89,37 @@ def isMirror(item1, item2):
   if not item1 or not item2:
       return False
   return (item1.val == item2.val and
-      self.isMirror(item1.left, item2.right) and
-      self.isMirror(item1.right, item2.left))
+          self.isMirror(item1.left, item2.right) and
+          self.isMirror(item1.right, item2.left))
+
+def serialize(root):
+  """Encodes a tree to a single string.
+
+  :type root: TreeNode
+  :rtype: str
+  """
+  queue = [root]
+  if root:
+    queue.append(root)
+
+  arr = []
+  while queue:
+    stop = True
+    queue2 = []
+    for item in queue:
+      arr.append(item.val)
+      if item.left or item.right:
+        stop = False
+      queue2.append(item.left if item.left else Node('#'))
+      queue2.append(item.right if item.right else Node('#'))
+    if stop:
+      break
+    queue = queue2
+
+  return str(arr)
+
+print('serialize')
+print(serialize(root))
+
+def deserialize(data):
+  pass
