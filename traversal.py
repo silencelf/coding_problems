@@ -121,5 +121,10 @@ def serialize(root):
 print('serialize')
 print(serialize(root))
 
+import ast
+
 def deserialize(data):
-  pass
+  arr = ast.literal_eval(data)
+  print(arr)
+
+deserialize(serialize(root))
