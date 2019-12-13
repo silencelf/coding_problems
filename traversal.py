@@ -6,6 +6,9 @@ class Node:
     self.left = left
     self.right = right
 
+  def __str__(self):
+    return self.val
+
 root = Node('F')
 root.left = Node('B', Node('A'), Node('D', Node('C'), Node('E')))
 root.right = Node('G', None, Node('I', Node('H')))
@@ -93,38 +96,40 @@ def isMirror(item1, item2):
           self.isMirror(item1.right, item2.left))
 
 def serialize(root):
-  """Encodes a tree to a single string.
+    """Encodes a tree to a single string.
 
-  :type root: TreeNode
-  :rtype: str
-  """
-  queue = [root]
-  if root:
-    queue.append(root)
+    :type root: TreeNode
+    :rtype: str
+    """
+    def ser(node, string):
+        if not node:
+            string += '#,'
+            return string
+        else:
+            string += node.val + ','
 
-  arr = []
-  while queue:
-    stop = True
-    queue2 = []
-    for item in queue:
-      arr.append(item.val)
-      if item.left or item.right:
-        stop = False
-      queue2.append(item.left if item.left else Node('#'))
-      queue2.append(item.right if item.right else Node('#'))
-    if stop:
-      break
-    queue = queue2
-
-  return str(arr)
+        string = ser(node.left, string)
+        string = ser(node.right, string)
+        return string
+    result = ser(root, '')
+    return result
 
 print('serialize')
 print(serialize(root))
 
-import ast
-
 def deserialize(data):
-  arr = ast.literal_eval(data)
-  print(arr)
+    queue = data.strip(',').split(',')
 
-deserialize(serialize(root))
+    def des(q):
+        val = q.pop(0)
+        if val == '#':
+            return None
+        node = Node(val)
+        node.left = des(q)
+        node.right = des(q)
+
+        return node
+    return des(queue)
+
+deserialized = deserialize(serialize(root))
+print(serialize(deserialized))
