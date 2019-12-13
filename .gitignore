@@ -1,3 +1,4 @@
 *.log
 .git
 .vscode
+.DS_Store
