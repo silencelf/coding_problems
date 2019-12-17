@@ -92,8 +92,8 @@ def isMirror(item1, item2):
   if not item1 or not item2:
       return False
   return (item1.val == item2.val and
-          self.isMirror(item1.left, item2.right) and
-          self.isMirror(item1.right, item2.left))
+          isMirror(item1.left, item2.right) and
+          isMirror(item1.right, item2.left))
 
 def serialize(root):
     """Encodes a tree to a single string.
