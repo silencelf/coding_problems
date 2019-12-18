@@ -2,6 +2,7 @@ from collections import deque
 class Solution:
     def openLock(self, deadends, target):
         visited, queue, step = set(deadends), deque(["0000"]), -1
+        move = {str(i): [str((i+1)%10), str((i-1)%10)] for i in range(10)}
 
         while queue:
             step += 1
@@ -13,12 +14,9 @@ class Solution:
                     return step
                 visited.add(item)
                 for i in range(4):
-                    queue.append(self.inc(item, i, 1))
-                    queue.append(self.inc(item, i, -1))
+                    queue.append(item[:i] + move[item[i]][0] + item[i + 1:])
+                    queue.append(item[:i] + move[item[i]][1] + item[i + 1:])
         return -1
-    
-    def inc(self, value, index, step):
-        return  value[:index] + str((int(value[index]) + step) % 10) + value[index + 1:]
 
 
 
