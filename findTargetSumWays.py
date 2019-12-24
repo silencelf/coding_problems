@@ -1,22 +1,20 @@
 #! /usr/bin/python3
 
-from collections import deque
-
-def findTargetSumWays(nums, s):
-    nu = deque(nums)
-    def search(numbers, sign, current, target):
-        if not numbers:
-            return 1 if current == target else 0
-
-        value = numbers.popleft()
-        if sign == '+':
-            current += value
+def findTargetSumWays(nums, S):
+    mem = {}
+    def find(arr, index, value, S):
+        if index == len(arr):
+            return 1 if value == S else 0
         else:
-            current -= value
-        plus = search(numbers.copy(), '+', current, target) 
-        minus = search(numbers.copy(), '-', current, target) 
-        return plus + minus
-    return search(nu.copy(), '+', 0, s) + search(nu.copy(), '-', 0, s)
+            if (index, value) in mem:
+                return mem[(index, value)]
+            cur = arr[index]
+            add = find(arr, index + 1, value + cur, S)
+            sub = find(arr, index + 1, value - cur, S)
+            total = add + sub
+            mem[(index, value)] = total
+            return total
+    return find(nums, 0, 0, S)
 
 nums, s = [1,1,1,1,1], 3
 expected = 5
