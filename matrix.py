@@ -9,8 +9,8 @@ def distance(matrix):
     for sr in range(rl):
         for sc in range(cl):
             visited = set([])
-            queue, dept= deque([(sr, sc)]), -1
-            while queue:
+            queue, dept, found = deque([(sr, sc)]), -1, False
+            while queue and not found:
                 dept += 1
                 q2 = deque([])
                 for (x, y) in queue:
@@ -19,7 +19,7 @@ def distance(matrix):
                     visited.add((x, y))
                     if matrix[x][y] == 0:
                         matrix[sr][sc] = dept
-                        queue.clear()
+                        found = True
                         break
                     if x > 0:
                         q2.append((x - 1, y))
