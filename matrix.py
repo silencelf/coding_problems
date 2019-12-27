@@ -8,12 +8,15 @@ def distance(matrix):
     rl, cl = len(matrix), len(matrix[0])
     for sr in range(rl):
         for sc in range(cl):
+            visited = set([])
             queue, dept= deque([(sr, sc)]), -1
             while queue:
                 dept += 1
                 q2 = deque([])
-                while queue:
-                    (x, y) = queue.popleft()
+                for (x, y) in queue:
+                    if (x, y) in visited:
+                        continue
+                    visited.add((x, y))
                     if matrix[x][y] == 0:
                         matrix[sr][sc] = dept
                         queue.clear()
@@ -30,9 +33,13 @@ def distance(matrix):
     return matrix
 
 matrix = [[0,0,0], [0,1,0], [0,0,0]]
-distance(matrix)
+# distance(matrix)
 print(matrix)
 
 matrix = [[0,0,0], [0,1,0], [1,1,1]]
+# distance(matrix)
+print(matrix)
+
+matrix = [[0,1,0],[0,1,0],[0,1,0],[0,1,0],[0,1,0]]
 distance(matrix)
 print(matrix)
