@@ -14,26 +14,33 @@ class Solution:
             return depth
         
         r, mh = [], 2**20
-        graph = {}
-        for i in range(n):
-            graph[i] = []
-            for e in edges:
-                if i in e:
-                    s = set(e)
-                    s.remove(i)
-                    graph[i].append(s.pop())
-        for i in range(n):
-            h = findHeight(i, graph)
-            if h < mh:
-                r, mh = [i], h
-            elif h == mh:
-                r.append(i)
-        return r
+        # create adjacent array
+        adj = [set() for _ in range(n)]
+        for (u,v) in edges: 
+            adj[u].add(v)
+            adj[v].add(u)
+
+        leaves = [i for i in range(n) if len(adj[i])==1]
+        while n > 2:
+            n -= len(leaves)
+            newLeaves = []
+            for i in leaves:
+                j = adj[i].pop()
+                adj[j].remove(i)
+                if len(adj[j]) == 1:
+                    newLeaves.append(j)
+            leaves = newLeaves
+        return leaves
 
 
 s = Solution()
-n, i =4, [[1, 0], [1, 2], [1, 3]]
-r = s.findMinHeightTrees(n, i)
+n, edges = 4, [[1, 0], [1, 2], [1, 3]]
+graph = [set() for _ in range(n)]
+for (u,v) in edges: 
+    graph[u].add(v)
+    graph[v].add(u)
+print(graph)
+r = s.findMinHeightTrees(n,edges)
 print(r)
 
 n = 6
