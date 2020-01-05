@@ -1,19 +1,5 @@
 class Solution:
     def findMinHeightTrees(self, n: int, edges):
-        def findHeight(i, graph):
-            queue, depth, visited = [i], 0, set([])
-            while queue:
-                depth += 1
-                q2 = []
-                for value in queue:
-                    if value in visited:
-                        continue
-                    visited.add(value)
-                    q2.extend(graph[value])
-                queue = q2
-            return depth
-        
-        r, mh = [], 2**20
         # create adjacent array
         adj = [set() for _ in range(n)]
         for (u,v) in edges: 
