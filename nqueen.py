@@ -1,6 +1,6 @@
 #! /usr/local/bin/python3
 class Solution:
-    def totalQueens(self, n):
+    def nQueens(self, n):
         result = []
         cols, diag1, diag2 = set([]), set([]), set([])
         def helper(row, arr, n):
@@ -32,9 +32,9 @@ class Solution:
     
 
 
-n = 4
+n = 8
 s = Solution()
-result = s.totalQueens(n)
+result = s.nQueens(n)
 for arr in result:
     print(arr)
 
@@ -47,3 +47,28 @@ for arr in result:
                 print('.', end = '')
         print('')
     print()
+
+# return the count of Nqueen solutions
+def totalNQueens(self, n: int) -> int:
+    cols, diag1, diag2 = set([]), set([]), set([])
+    def helper(row, count, n):
+        for col in range(n):
+            if col in cols:
+                continue
+            if (row - col) in diag1:
+                continue
+            if (row + col) in diag2:
+                continue
+            if row == n - 1:
+                count += 1
+            else:
+                cols.add(col)
+                diag1.add(row - col)
+                diag2.add(row + col)
+                count = helper(row + 1, count, n)
+                cols.remove(col)
+                diag1.remove(row - col)
+                diag2.remove(row + col)
+        return count
+
+    return helper(0, 0, n)
