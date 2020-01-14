@@ -32,14 +32,14 @@ def distance(matrix):
                 queue = q2
     return matrix
 
-matrix = [[0,0,0], [0,1,0], [0,0,0]]
+matrix = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
 # distance(matrix)
 print(matrix)
 
-matrix = [[0,0,0], [0,1,0], [1,1,1]]
+matrix = [[0, 0,0], [0, 1, 0], [1, 1, 1]]
 # distance(matrix)
 print(matrix)
 
-matrix = [[0,1,0],[0,1,0],[0,1,0],[0,1,0],[0,1,0]]
+matrix = [[0, 1, 0],[0, 1, 0],[0, 1, 0],[0, 1, 0],[0, 1, 0]]
 distance(matrix)
 print(matrix)
