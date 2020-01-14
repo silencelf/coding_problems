@@ -2,7 +2,7 @@ class Solution:
     def findMinHeightTrees(self, n: int, edges):
         # create adjacent array
         adj = [set() for _ in range(n)]
-        for (u,v) in edges: 
+        for (u,v) in edges:
             adj[u].add(v)
             adj[v].add(u)
 
@@ -22,7 +22,7 @@ class Solution:
 s = Solution()
 n, edges = 4, [[1, 0], [1, 2], [1, 3]]
 graph = [set() for _ in range(n)]
-for (u,v) in edges: 
+for (u,v) in edges:
     graph[u].add(v)
     graph[v].add(u)
 print(graph)

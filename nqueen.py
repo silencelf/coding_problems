@@ -13,8 +13,7 @@ class Solution:
                     continue
                 if row == n - 1:
                     arr.append(col)
-                    arr2 = arr.copy()
-                    result.append(arr2)
+                    result.append(arr.copy())
                     arr.pop()
                 else:
                     cols.add(col)
