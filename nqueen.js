@@ -2,7 +2,7 @@ var totalNQueens = function(n) {
     const cols = {};
     const diag1 = {};
     const diag2 = {};
-    
+
     function helper(row, count, n) {
         for (let col = 0; col < n; col++) {
             if (cols[col]) continue;
@@ -10,7 +10,7 @@ var totalNQueens = function(n) {
             const sub = row - col;
             if (diag1[sum]) continue;
             if (diag2[sub]) continue;
-            
+
             if (row == n - 1) {
                 count++;
             } else {
@@ -25,7 +25,7 @@ var totalNQueens = function(n) {
         }
         return count;
     }
-    
+
     return helper(0, 0, n);
 };
 
