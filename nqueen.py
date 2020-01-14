@@ -29,27 +29,26 @@ class Solution:
 
         helper(0, [], n)
         return result
-    
 
 
-n = 8
+N = 8
 s = Solution()
-result = s.nQueens(n)
+result = s.nQueens(N)
 for arr in result:
     print(arr)
 
 for arr in result:
-    for i in range(n):
-        for j in range(n):
+    for i in range(N):
+        for j in range(N):
             if j == arr[i]:
-                print('Q', end= '')
+                print('Q', end='')
             else:
-                print('.', end = '')
+                print('.', end='')
         print('')
     print()
 
 # return the count of Nqueen solutions
-def totalNQueens(self, n: int) -> int:
+def totalNQueens(n: int) -> int:
     cols, diag1, diag2 = set([]), set([]), set([])
     def helper(row, count, n):
         for col in range(n):
