@@ -1,4 +1,5 @@
 class Solution:
+    counter = 0
     def solveSudoku(self, board):
         """
         Do not return anything, modify board in-place instead.
@@ -20,19 +21,22 @@ class Solution:
                 rows[row].add(value)
                 cols[col].add(value)
                 squares[int(row/3)][int(col/3)].add(value)
-        def nextIndex(r, c):
+
+        def next_index(r, c):
             if c < 8:
-                return (r, c+1)
-            elif r < 8:
-                return (r+1, 0)
-            else:
-                return None
+                return (r, c + 1)
+            if r < 8:
+                return (r + 1, 0)
+            return None
+
         def helper(row, col):
             if row > 8 or col > 8:
+                print('search ended without a solution.')
                 return False
-            srow, scol  = int(row/3), int(col/3)
+            srow, scol = int(row/3), int(col/3)
             if board[row][col] == '.':
                 for inumber in range(1, 10):
+                    self.counter += 1
                     i = str(inumber)
                     if i in rows[row]:
                         continue
@@ -42,33 +46,31 @@ class Solution:
                         continue
                     if row == 8 and col == 8:
                         board[row][col] = i
-                        print(board)
                         return True
-                    else:
-                        board[row][col] = i
-                        print(board)
-                        rows[row].add(i)
-                        cols[col].add(i)
-                        squares[srow][scol].add(i)
-                        (nr,nc) = nextIndex(row, col)
-                        success = helper(nr, nc)
-                        if success:
-                            return True
-                        else:
-                            rows[row].remove(i)
-                            cols[col].remove(i)
-                            squares[srow][scol].remove(i)
-                            board[row][col] = '.'
+                    board[row][col] = i
+                    rows[row].add(i)
+                    cols[col].add(i)
+                    squares[srow][scol].add(i)
+                    (nr, nc) = next_index(row, col)
+                    success = helper(nr, nc)
+                    if success:
+                        return True
+                    # backtrack
+                    board[row][col] = '.'
+                    rows[row].remove(i)
+                    cols[col].remove(i)
+                    squares[srow][scol].remove(i)
+                return False
             else:
                 if row == 8 and col == 8:
                     return True
-                (nr,nc) = nextIndex(row, col)
-                helper(nr, nc)
-            return False
-                
+                (nr, nc) = next_index(row, col)
+                return helper(nr, nc)
         helper(0, 0)
-                            
+        print(f'total attempts: {self.counter}')
+
 s = Solution()
 input = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
+
 s.solveSudoku(input)
 print(input)
