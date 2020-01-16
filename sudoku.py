@@ -27,45 +27,43 @@ class Solution:
                 return (r, c + 1)
             if r < 8:
                 return (r + 1, 0)
-            return None
 
         def helper(row, col):
             if row > 8 or col > 8:
                 print('search ended without a solution.')
                 return False
             srow, scol = int(row/3), int(col/3)
-            if board[row][col] == '.':
-                for inumber in range(1, 10):
-                    self.counter += 1
-                    i = str(inumber)
-                    if i in rows[row]:
-                        continue
-                    if i in cols[col]:
-                        continue
-                    if i in squares[srow][scol]:
-                        continue
-                    if row == 8 and col == 8:
-                        board[row][col] = i
-                        return True
-                    board[row][col] = i
-                    rows[row].add(i)
-                    cols[col].add(i)
-                    squares[srow][scol].add(i)
-                    (nr, nc) = next_index(row, col)
-                    success = helper(nr, nc)
-                    if success:
-                        return True
-                    # backtrack
-                    board[row][col] = '.'
-                    rows[row].remove(i)
-                    cols[col].remove(i)
-                    squares[srow][scol].remove(i)
-                return False
-            else:
+            if not board[row][col] == '.':
                 if row == 8 and col == 8:
                     return True
                 (nr, nc) = next_index(row, col)
                 return helper(nr, nc)
+            for inumber in range(1, 10):
+                self.counter += 1
+                i = str(inumber)
+                if i in rows[row]:
+                    continue
+                if i in cols[col]:
+                    continue
+                if i in squares[srow][scol]:
+                    continue
+                if row == 8 and col == 8:
+                    board[row][col] = i
+                    return True
+                board[row][col] = i
+                rows[row].add(i)
+                cols[col].add(i)
+                squares[srow][scol].add(i)
+                (nr, nc) = next_index(row, col)
+                success = helper(nr, nc)
+                if success:
+                    return True
+                # backtrack
+                board[row][col] = '.'
+                rows[row].remove(i)
+                cols[col].remove(i)
+                squares[srow][scol].remove(i)
+            return False
         helper(0, 0)
         print(f'total attempts: {self.counter}')
 
