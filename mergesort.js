@@ -39,10 +39,8 @@ function merge(left, right) {
 
 let input = [3, 1, 23, 2, 235, 88, 634, 27, 73, 56, 89, 14, 22];
 let sorted = mergeSort(input);
-console.log('sorted array:')
-console.log(sorted);
+console.log(`sorted array: ${sorted}`);
 
 input = [1, 2, 3, 4 , 5];
 sorted = mergeSort(input);
-console.log('sorted array:')
-console.log(sorted);
+console.log(`sorted array: ${sorted}`);
