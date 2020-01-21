@@ -38,28 +38,41 @@ function bfsTopSort(vertexes) {
   // create a in-degree tables
   const indegrees = {};
   for(const u of vertexes) {
+    indegrees[u.val] = {
+      in: 0,
+      ref: u
+    };
+  }
+  for(const u of vertexes) {
     for(const v of u.neighbors) {
-      if (indegrees[v.val]) {
-        indegrees[v.val]++;
-      } else {
-        indegrees[v.val] = 1;
+      indegrees[v.val].in++;
+    }
+  }
+  let roots = [];
+  for(const k in indegrees) {
+    const item = indegrees[k];
+    if (item.in == 0) {
+      roots.push(item.ref);
+    }
+  }
+  const sorted = [];
+  while (roots.length > 0) {
+    const newRoots = [];
+    console.log('new roots:')
+    console.log(roots);
+    for (const leaf of roots) {
+      sorted.push(leaf.val);
+      for (const child of leaf.neighbors) {
+        indegrees[child.val].in--;
+        if (indegrees[child.val].in == 0) {
+          newRoots.push(child);
+        }
       }
     }
+    roots = newRoots;
   }
 
-  console.log(indegrees);
-  return;
-  const sorted = [];
-  const leaves = vertexes.filter(v => v.neighbors.length === 0);
-  while (leaves.length > 0) {
-    for (const l of leaves) {
-      sorted.push(l);
-      for (const parent of reverse[l]) {
-        parent
-      }
-    }
-  }
-  // compute the out-degree of vertexes
+  return sorted.reverse();
 }
 
 const g = new Vertex('G', []);
@@ -70,7 +83,10 @@ const c = new Vertex('C', [e]);
 const a = new Vertex('A', [c]);
 const b = new Vertex('B', [c, d]);
 const graph = [a, b, c, d, e, f, g];
+// dfs
 // const sorted = topSort(graph);
 // console.log(sorted.reverse());
 
-bfsTopSort(graph);
+// bfs
+const sorted = bfsTopSort(graph);
+console.log(sorted);
