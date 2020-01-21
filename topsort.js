@@ -58,7 +58,7 @@ function bfsTopSort(vertexes) {
   const sorted = [];
   while (roots.length > 0) {
     const newRoots = [];
-    console.log('new roots:')
+    console.log('new roots:');
     console.log(roots);
     for (const leaf of roots) {
       sorted.push(leaf.val);
