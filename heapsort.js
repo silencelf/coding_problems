@@ -1,25 +1,15 @@
 function heapify(input) {
-  if (input.length <= 1) return;
+  if (input.length <= 1)
+    return;
 
   let index = input.length - 1;
   while (index > 0) {
-    const parent = parentIndex(index);
-    if (parent == null) break;
-
+    const parent = parseInt((index-1)/2);
     if (input[index] > input[parent]) {
       swap(input, index, parent);
     }
     index--;
   }
-}
-
-function parentIndex(index) {
-  const pIndex = parseInt((index - 1)/2);
-
-  if (pIndex >= 0)
-    return pIndex;
-
-  return null;
 }
 
 function swap(input, index1, index2) {
@@ -30,23 +20,21 @@ function swap(input, index1, index2) {
 
 function siftDown(arr, maxIndex) {
   let index = 0;
-  let lIndex;
-
   do {
-    lIndex = index*2 + 1;
-    if (lIndex > maxIndex)
-      break;
+    let left = 2*index + 1;
+    let right = 2*index + 2;
+    let largest = index;
     // get largest child
-    if (lIndex < maxIndex) {
-      lIndex = arr[lIndex] > arr[lIndex+1] ? lIndex: lIndex + 1;
-    }
-    if (arr[index] >= arr[lIndex])
+    if (left < maxIndex && arr[left] > arr[index])
+      largest = left;
+    if (right < maxIndex && arr[right] > arr[largest])
+      largest = right;
+    if (largest == index)
       break;
-    swap(arr, index, lIndex);
+    swap(arr, index, largest);
     console.log(arr);
-    index = lIndex;
-    lIndex = index*2 + 1;
-  } while (lIndex <= maxIndex);
+    index = largest;
+  } while (index <= maxIndex);
 }
 
 function heapSort(arr) {
