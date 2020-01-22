@@ -1,14 +1,8 @@
-function heapify(input) {
-  if (input.length <= 1)
-    return;
-
-  let index = input.length - 1;
-  while (index > 0) {
-    const parent = parseInt((index-1)/2);
-    if (input[index] > input[parent]) {
-      swap(input, index, parent);
-    }
-    index--;
+function heapify(input, count) {
+  let start = parseInt((count-2)/2);
+  while (start >= 0) {
+    siftDown(input, start, count-1);
+    start--;
   }
 }
 
@@ -18,46 +12,52 @@ function swap(input, index1, index2) {
   input[index2] = temp;
 }
 
-function siftDown(arr, maxIndex) {
-  let index = 0;
+function siftDown(arr, start, end) {
+  let index = start;
   do {
     let left = 2*index + 1;
     let right = 2*index + 2;
     let largest = index;
     // get largest child
-    if (left < maxIndex && arr[left] > arr[index])
+    if (left <= end && arr[left] > arr[index])
       largest = left;
-    if (right < maxIndex && arr[right] > arr[largest])
+    if (right <= end && arr[right] > arr[largest])
       largest = right;
     if (largest == index)
       break;
     swap(arr, index, largest);
-    console.log(arr);
     index = largest;
-  } while (index <= maxIndex);
+  } while (index <= end);
+  console.log('after siftdown:');
+  console.log(arr);
 }
 
 function heapSort(arr) {
-  if (arr.length <= 1)
-    return;
-
   let index = arr.length - 1;
-  heapify(arr);
-  console.log('heapify:');
+  heapify(arr, arr.length);
+  console.log('after heapify:');
   console.log(arr);
-
   while (index > 0) {
     swap(arr, 0, index);
     index--;
-    siftDown(arr, index);
+    siftDown(arr, 0, index);
   }
 }
 
 // tests
-const input = [6, 5, 3, 1, 8, 7, 2, 4];
-// heapify(input);
-// siftUp(input, input.length -1);
+let input = [6, 5, 3, 1, 8, 7, 2, 4];
+heapSort(input);
+console.log('After sorting:');
+console.log(input);
 
+console.log('---------------------------------------');
+input = [];
+heapSort(input);
+console.log('After sorting:');
+console.log(input);
+
+console.log('---------------------------------------');
+input = [1, 2, 3, 4, 5];
 heapSort(input);
 console.log('After sorting:');
 console.log(input);
