@@ -16,31 +16,30 @@ var myAtoi = function(str) {
     var result = 0;
     var sign = 1;
     for(var c of str) {
-        if(valid === false && c == ' ')
+        if (!valid && c == ' ')
             continue;
-        if(valid === false && (!dict.hasOwnProperty(c) && c!='-' && c!='+'))
+        if (!valid && (!dict.hasOwnProperty(c) && c !== '-' && c !== '+'))
             return 0;
-        if(valid == true && !dict.hasOwnProperty(c))
+        if (valid && !dict.hasOwnProperty(c))
             break;
-        if(valid === false && c == '-') {
-            sign = false;
+        if (!valid && c === '-') {
+            sign = -1;
             valid = true;
         }
-        if(valid === false && dict.hasOwnProperty(c)) {
+        if (!valid && dict.hasOwnProperty(c))
             valid = true;
-        }
-        if(valid === false && c == '+') {
+        if (!valid && c === '+')
             valid = true;
-        }
         if (dict.hasOwnProperty(c))
-            result = result*10 + dict[c];
+            result = result * 10 + dict[c];
     }
 
-    if (result >= Math.pow(2, 31)) {
-        return sign == 1? Math.pow(2, 31) - 1: sign * Math.pow(2, 31);
-    }
+    if (result >= Math.pow(2, 31))
+        return sign == 1 ? Math.pow(2, 31) - 1: sign * Math.pow(2, 31);
+
     return sign*result;
 };
 
 console.log(myAtoi("+1"));
 console.log(myAtoi("+556 other words"));
+console.log(myAtoi("-556"));
