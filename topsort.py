@@ -6,8 +6,8 @@ class Vertex:
     def __init__(self, value, neighbors):
         self.value = value
         self.neighbors = neighbors
-    def __str_(self):
-        return value
+    def __str__(self):
+        return self.value
 
 def topsort(vertexes):
     visited = set({})
@@ -37,4 +37,4 @@ v6 = Vertex('A', [v4, v5])
 input = [v1, v2, v3, v4 ,v5, v6]
 ret = topsort(input)
 for v in ret:
-    print(v.value) if v else 'None'
+    print(v)
