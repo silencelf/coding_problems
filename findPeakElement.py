@@ -29,4 +29,4 @@ class Solution:
 sol = Solution()
 nums = [1,2,1,3,5,6,4]
 result  = sol.findPeakElement(nums)
-print(f'{nums} : {result}')
+print(f'Peak of {nums} : {nums[result]}')
