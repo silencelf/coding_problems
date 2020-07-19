@@ -19,7 +19,7 @@ class Heap:
         self.__heapify__(self.arr, len(self.arr), 0)
         return val
 
-    def peak(self):
+    def peek(self):
         if self.arr:
             return self.arr[0]
         return None
@@ -53,7 +53,7 @@ class Heap:
 input = [17, 15, 13, 9, 6, 5, 10, 4, 8, 3, 1]
 heap = Heap(input)
 print(heap)
-print(heap.peak())
+print(heap.peek())
 
 # extract elements
 print('extract:')
