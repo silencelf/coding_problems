@@ -1,39 +1,34 @@
 #! /usr/bin/python3
+from timeit import timeit
 
-import time
-
-def timeit(func):
-    def timed(*args, **kw):
-        ts = time.time()
-        result = func(*args, **kw)
-        te = time.time()
-        print('%2.2fms' % (te - ts))
-        return result
-    return timed
+cache = {}
+def cacheit(func):
+    def cached(n):
+        if n not in cache:
+            ret = func(n)
+            cache[n] = ret
+        return cache[n]
+    return cached
 
 def fib1(n):
     if n <= 2:
         return 1
     return fib1(n - 1) + fib1(n - 2)
 
-#print(fib1(10))
+@timeit
+def raw_test():
+    print(fib1(37))
+
+#raw_test()
 
 # recursion with memo
-# TODO: wirte a decorator function to momorize the value
-dp = {}
+@cacheit
 def fib2(n):
-    r = 0
-    if n in dp:
-        return dp[n]
     if n <= 2:
-        r = 1
-        dp[n] = r
-        return r
-    r =  fib2(n - 1) + fib2(n - 2)
-    dp[n] = r
-    return r
+        return 1
+    return fib2(n - 1) + fib2(n - 2)
 
-#print(fib2(1000))
+print(fib2(500))
 
 #dp
 def fib(n):
@@ -45,4 +40,4 @@ def fib(n):
         dp[i] = r
     return dp[n]
 
-print(fib(10000))
+#print(fib(10000))
