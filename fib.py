@@ -19,6 +19,7 @@ def fib1(n):
 #print(fib1(10))
 
 # recursion with memo
+# TODO: wirte a decorator function to momorize the value
 dp = {}
 def fib2(n):
     r = 0
