@@ -1,14 +1,15 @@
 #! /usr/bin/python3
 from timeit import timeit
 
-cache = {}
-def cacheit(func):
-    def cached(n):
-        if n not in cache:
-            ret = func(n)
-            cache[n] = ret
-        return cache[n]
-    return cached
+def cacheit(cache):
+    def inner(func):
+        def cached(n):
+            if n not in cache:
+                ret = func(n)
+                cache[n] = ret
+            return cache[n]
+        return cached
+    return inner
 
 def fib1(n):
     if n <= 2:
@@ -21,14 +22,16 @@ def raw_test():
 
 #raw_test()
 
+cache = {}
 # recursion with memo
-@cacheit
+@cacheit(cache)
 def fib2(n):
     if n <= 2:
         return 1
     return fib2(n - 1) + fib2(n - 2)
 
 print(fib2(500))
+print(cache)
 
 #dp
 def fib(n):
