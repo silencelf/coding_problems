@@ -24,8 +24,19 @@ Absolute value of elements in the array and x will not exceed 104
 
 class Solution:
     def findClosestElements(self, arr, k, x):
-        pass
-
+        left, right = 0, len(arr) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if arr[mid] == x:
+                return mid
+            elif arr[mid] < x:
+                left = mid + 1
+            else:
+                right = mid - 1
+        # End condition left == right
+#       if left != len(arr) and arr[left] == x:
+#           return left
+        return -1
 
 s = Solution()
 
@@ -35,5 +46,8 @@ k = 4
 x = 3
 expected = [1,2,3,4]
 
-result = s.findClosestElements(arr, k, x)
-print(result)
+index = 0
+while index < len(arr):
+    result = s.findClosestElements(arr, k, arr[index])
+    print(result)
+    index += 1
