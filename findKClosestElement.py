@@ -23,20 +23,21 @@ Absolute value of elements in the array and x will not exceed 104
 """
 
 class Solution:
-    def findClosestElements(self, arr, k, x):
+    def binSearch(self, arr, x): 
         left, right = 0, len(arr) - 1
         while left <= right:
             mid = (left + right) // 2
             if arr[mid] == x:
-                return mid
+                return (True, mid)
             elif arr[mid] < x:
                 left = mid + 1
             else:
                 right = mid - 1
-        # End condition left == right
-#       if left != len(arr) and arr[left] == x:
-#           return left
-        return -1
+        return (False, mid)
+
+    def findClosestElements(self, arr, k, x):
+        index = self.binSearch(arr, x)
+        return index
 
 s = Solution()
 
@@ -46,8 +47,11 @@ k = 4
 x = 3
 expected = [1,2,3,4]
 
-index = 0
-while index < len(arr):
-    result = s.findClosestElements(arr, k, arr[index])
-    print(result)
-    index += 1
+# index = 0
+# while index < len(arr):
+#     result = s.findClosestElements(arr, k, arr[index])
+#     print(result)
+#     index += 1
+
+result = s.findClosestElements(arr, k, 3)
+print(result)
