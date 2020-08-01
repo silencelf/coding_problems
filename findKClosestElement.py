@@ -46,13 +46,15 @@ class Solution:
         result = []
         if arr[index] == x:
             result.append(arr[index])
-        i = index - 1
-        j = index + 1
-        while k > 1:
+            i = index - 1
+            j = index + 1
+            k = k - 1
+        else:
+            i = index - 1
+            j = index
+        while k > 0:
             left = arr[i] - x
             right = arr[j] - x
-            print(i)
-            print(j)
             if i > -1 and left <= right:
                 print('left')
                 result.append(arr[i])
@@ -82,4 +84,7 @@ result = s.findClosestElements(arr, k, 3)
 print(result)
 
 result = s.findClosestElements(arr, 3, 4)
+print(result)
+
+result = s.findClosestElements(arr, 3, 2.5)
 print(result)
