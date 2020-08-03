@@ -22,12 +22,16 @@ class Heap:
         self.__heapify__(self.arr, len(self.arr), 0)
         return val
 
-    def decreace(self, key, value):
+    def decrease(self, key, value):
         if value not in self.loc:
             return
         index = self.loc[value]
         self.arr[index] = (key, value)
-        self.__heapify__(self.arr, len(self.arr), index)
+        while True:
+            self.__heapify__(self.arr, len(self.arr), index)
+            if index == 0:
+                break
+            index = index // 2
 
     def peek(self):
         if self.arr:
@@ -64,60 +68,61 @@ class Heap:
         for i in range(startIndex, -1, -1):
             self.__heapify__(arr, len(arr), i)
 
-input = [(17, 'a'), (15, 'b'), (13, 'c'), (9, 'd'), (6, 'e'), (5, 'f'), (10,
-    'g'), (4, 'h'), (8, 'i'), (3, 'j'), (1, 'k')]
-heap = Heap(input)
-print(heap)
-print(heap.loc)
+def tests():
+    input = [(17, 'a'), (15, 'b'), (13, 'c'), (9, 'd'), (6, 'e'), (5, 'f'), (10,
+        'g'), (4, 'h'), (8, 'i'), (3, 'j'), (1, 'k')]
+    heap = Heap(input)
+    print(heap)
+    print(heap.loc)
 
-# extract elements
-print('extract:')
-val = heap.extract()
-print(val)
-print(heap)
-val = heap.extract()
-print(val)
-print(heap)
-val = heap.extract()
-print(val)
-print(heap)
-val = heap.extract()
-print(val)
-print(heap)
-val = heap.extract()
-print(val)
-print(heap)
+    # extract elements
+    print('extract:')
+    val = heap.extract()
+    print(val)
+    print(heap)
+    val = heap.extract()
+    print(val)
+    print(heap)
+    val = heap.extract()
+    print(val)
+    print(heap)
+    val = heap.extract()
+    print(val)
+    print(heap)
+    val = heap.extract()
+    print(val)
+    print(heap)
 
-# add more elements
-print('add:')
-val = heap.add(1, 'k')
-print(heap)
-print(heap.loc)
-val = heap.add(3, 'j')
-print(heap)
-print(heap.loc)
-val = heap.add(4, 'h')
-print(heap)
-print(heap.loc)
-val = heap.add(5, 'f')
-print(heap)
-print(heap.loc)
-val = heap.add(6, 'e')
-print(heap)
-print(heap.loc)
+    # add more elements
+    print('add:')
+    val = heap.add(1, 'k')
+    print(heap)
+    print(heap.loc)
+    val = heap.add(3, 'j')
+    print(heap)
+    print(heap.loc)
+    val = heap.add(4, 'h')
+    print(heap)
+    print(heap.loc)
+    val = heap.add(5, 'f')
+    print(heap)
+    print(heap.loc)
+    val = heap.add(6, 'e')
+    print(heap)
+    print(heap.loc)
 
-heap = Heap([])
-print(heap)
-print(heap.loc)
-heap.add(5, 'A')
-print(heap)
-print(heap.loc)
-heap.add(3, 'B')
-print(heap)
-print(heap.loc)
-heap.add(1, 'C')
-print(heap)
-print(heap.loc)
-heap.decreace(10, 'C')
-print(heap)
-print(heap.loc)
+    heap = Heap([])
+    print(heap)
+    print(heap.loc)
+    heap.add(5, 'A')
+    print(heap)
+    print(heap.loc)
+    heap.add(3, 'B')
+    print(heap)
+    print(heap.loc)
+    heap.add(1, 'C')
+    print(heap)
+    print(heap.loc)
+    heap.decrease(10, 'C')
+    print(heap)
+    print(heap.loc)
