@@ -22,6 +22,13 @@ class Heap:
         self.__heapify__(self.arr, len(self.arr), 0)
         return val
 
+    def decreace(self, key, value):
+        if value not in self.loc:
+            return
+        index = self.loc[value]
+        self.arr[index] = (key, value)
+        self.__heapify__(self.arr, len(self.arr), index)
+
     def peek(self):
         if self.arr:
             return self.arr[0]
@@ -109,5 +116,8 @@ heap.add(3, 'B')
 print(heap)
 print(heap.loc)
 heap.add(1, 'C')
+print(heap)
+print(heap.loc)
+heap.decreace(10, 'C')
 print(heap)
 print(heap.loc)
