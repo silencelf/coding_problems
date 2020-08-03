@@ -1,12 +1,30 @@
+import math
 from vertex import Vertex
+from queue import PriorityQueue
 
-v1 = Vertex(1);
-v2 = Vertex(2);
+a = Vertex('A') 
+b = Vertex('B') 
+c = Vertex('C') 
+d = Vertex('D') 
+e = Vertex('E') 
+f = Vertex('F') 
 
-ht = {};
-ht[v1] = 1;
-ht[v2] = 2;
+adj = {}
+adj[a] = [(b, 4), (c, 2)]
+adj[b] = [(c, 5), (d, 10)]
+adj[c] = [(e, 3)]
+adj[d] = [(f, 11)]
+adj[e] = [(d, 4)]
+adj[f] = []
 
-print(ht);
-print(ht[v1]);
-print(ht[v2]);
+def shortest_path(adj, s):
+    # have to write a priority queue myself
+    q = PriorityQueue()
+    for v in adj:
+        if v == s:
+            q.put(0, v)
+        else:
+            q.put(math.inf, v)
+    print(q)
+
+shortest_path(adj, a)
