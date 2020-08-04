@@ -31,9 +31,6 @@ def shortest_path(adj, s):
 
     while True:
         v = heap.extract()
-        print(v)
-        print('heap:')
-        print(heap)
         if v is None:
             break
         current = v[1]
