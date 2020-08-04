@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 import math
 from heap import Heap
 
