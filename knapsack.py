@@ -1,31 +1,36 @@
-#! /usr/bin/python3
+#! /usr/bin/python
 
 values = [60, 100, 120, 130]
 weights = [10, 20, 30, 30]
-W = 50
+W = 60
 memo = {}
 
-def knapsack(n, s):
-    print(memo)
-    print(f'n = {n}, s = {s}')
-    w = weights[n]
-    v = values[n]
-    #print(f'w = {w}, v = {v}')
-    if (n, s) in memo:
-        print('found in memo')
-        return memo[(n, s)]
-    f = 0
-    if n == -1 or s == 0:
-        memo[(n, s)] = f
-        return f
-    if w > s:
-        f = knapsack(n - 1, s)
-    else:
-        v1 = knapsack(n - 1, s)
-        v2 = v + knapsack(n - 1, s - w)
-        f =  max(v1, v2)
-    memo[(n, s)] = f
-    return f
+def knapsack(i, c):
+    if (i, c) in memo:
+        return memo[(i, c)]
+    if i == -1:
+        return 0
+    if c < weights[i]:
+        memo[(i, c)] = knapsack2(i - 1, c)
+        return memo[(i, c)]
+    take = knapsack2(i - 1, c - weights[i]) + values[i]
+    notake = knapsack2(i - 1, c)
+    memo[(i, c)] = max(take, notake)
+    return memo[(i, c)]
 
-result = knapsack(len(values) - 1, W)
+def knapsack2(i, c):
+    if i == -1:
+        return 0
+    if c < weights[i]:
+        return knapsack2(i - 1, c)
+    take = knapsack2(i - 1, c - weights[i]) + values[i]
+    notake = knapsack2(i - 1, c)
+    return max(take, notake)
+
+result = knapsack(len(values) - 1, 60)
 print(f'knapset result: {result}')
+result = knapsack(len(values) - 1, 50)
+print(f'knapset result: {result}')
+result = knapsack(len(values) - 1, 40)
+print(f'knapset result: {result}')
+
