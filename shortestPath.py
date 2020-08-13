@@ -48,3 +48,6 @@ def shortest_path(adj, s):
 result = shortest_path(adj, a)
 print(result[0])
 print(result[1])
+
+def shortest_path_dp(adj, s):
+    pass
