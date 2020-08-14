@@ -20,9 +20,12 @@ def binary_search(arr, i):
 # index = binary_search(arr, start, end, 70)
 # print(index)
 
-arr = [i for i in range(1000000)]
+count = 100
+arr = [random.randrange(100000) for i in range(count)]
+arr.sort()
+print(arr)
 
 for i in range(10):
-    num = random.randrange(2000000)
-    index = binary_search(arr, num)
-    print(f'find {num}, result = {index}')
+    num = random.randrange(count)
+    index = binary_search(arr, arr[num])
+    print(f'find {arr[num]}, result index = {index}, actual index is {num}')
