@@ -45,9 +45,44 @@ def shortest_path(adj, s):
                 heap.decrease(D[e], e)
     return (D, P)
 
-result = shortest_path(adj, a)
-print(result[0])
-print(result[1])
+# result = shortest_path(adj, a)
+# print(result[0])
+# print(result[1])
+
+parent = {}
+for v in adj:
+    for e in adj[v]:
+        d, v2 = e
+        if v2 not in parent:
+            parent[v2] = [(d, v)]
+        else:
+            parent[v2].append((d, v))
+parent[a] = [(0, a)]
+
+memo = {}
+def sp(adj, s, v, D, P):
+    if (s, v) in memo:
+        return memo[(s, v)]
+    if s == v:
+        return 0
+    for (w, i) in adj[v]:
+        d = sp(adj, s, i, D, P) + w
+        # d(s, v)  = min(d(s, u) + d(u, v) for u belongs to {incomming edges of v})
+        if d < D[v]:
+            D[v] = d
+            P[v] = i
+    # memo actually adds items by the topological order of G(v, e)
+    memo[(s, v)] = D[v]
+    print(f'memo extends to: {memo}')
+    return D[v]
 
 def shortest_path_dp(adj, s):
-    pass
+    D = { v: math.inf for v in adj}
+    D[s] = 0
+    P = {}
+    for v in parent:
+        sp(adj, s, v, D, P)
+    return (D, P)
+
+result = shortest_path_dp(parent, a)
+print(result)
