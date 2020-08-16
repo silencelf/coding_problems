@@ -45,9 +45,9 @@ def shortest_path(adj, s):
                 heap.decrease(D[e], e)
     return (D, P)
 
-# result = shortest_path(adj, a)
-# print(result[0])
-# print(result[1])
+result = shortest_path(adj, a)
+print(result[0])
+print(result[1])
 
 parent = {}
 for v in adj:
@@ -85,4 +85,5 @@ def shortest_path_dp(adj, s):
     return (D, P)
 
 result = shortest_path_dp(parent, a)
-print(result)
+print(result[0])
+print(result[1])
