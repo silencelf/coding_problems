@@ -1,6 +1,7 @@
 function mergeSort(input) {
-  if (input.length <= 1) return input;
-  const index = parseInt(input.length/2);
+  if (input.length <= 1)
+    return input;
+  const index = parseInt(input.length / 2);
   let right = input.splice(index);
   const la = mergeSort(input);
   const ra = mergeSort(right);
