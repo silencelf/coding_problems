@@ -75,6 +75,7 @@ def staircase_multi_dp(n, X, cache):
         return cache[n]
 
     cache[n] = sum(staircase_multi_dp(n - x, X, cache) for x in X if n - x >= 0)
+    print(f'cached updated: {cache}');
     return cache[n]
 
 # but for pactice let's try the iterative way
@@ -90,44 +91,58 @@ def staircase_multi_iter(n, X):
 count = 35
 steps = [2, 3]
 
-# brutal force
-start = time.time()
-print(staircase(count))
-end = time.time()
-print("simple: --- %.4f seconds ---" % (end - start))
-
-# dynamic programming
-start = time.time()
-dict = {}
-print(staircase_dp(count, dict))
-end = time.time()
-print(dict)
-print("simple DP: --- %.4f seconds ---" % (end - start))
-
-# iterative
-start = time.time()
-print(staircase_iter(count))
-end = time.time()
-print("simple iterator: --- %.4f seconds ---" % (end - start))
-
-# flexable but not efficient
+# readablily and performance
 start = time.time()
 print(staircase_multi(count, steps))
 end = time.time()
 print("flexible: --- %.4f seconds ---" % (end - start))
 
-# flexable but not efficient
+# readablily and performance
 start = time.time()
-cache = {}
-print(staircase_multi_dp(count, steps, cache))
+print(staircase_multi_dp(count, steps, {}))
 end = time.time()
-print(cache)
-print("flexible DP: --- %.4f seconds ---" % (end - start))
+print("flexible: --- %.4f seconds ---" % (end - start))
 
-# flexable iteritave with dp
-start = time.time()
-print(staircase_multi_iter(count, steps))
-end = time.time()
-print("flexible iter DP: --- %.4f seconds ---" % (end - start))
-
-#test_staircase()
+# 
+# # brutal force
+# start = time.time()
+# print(staircase(count))
+# end = time.time()
+# print("simple: --- %.4f seconds ---" % (end - start))
+# 
+# # dynamic programming
+# start = time.time()
+# dict = {}
+# print(staircase_dp(count, dict))
+# end = time.time()
+# print(dict)
+# print("simple DP: --- %.4f seconds ---" % (end - start))
+# 
+# # iterative
+# start = time.time()
+# print(staircase_iter(count))
+# end = time.time()
+# print("simple iterator: --- %.4f seconds ---" % (end - start))
+# 
+# # flexable but not efficient
+# start = time.time()
+# print(staircase_multi(count, steps))
+# end = time.time()
+# print("flexible: --- %.4f seconds ---" % (end - start))
+# 
+# # flexable but not efficient
+# start = time.time()
+# cache = {}
+# print(staircase_multi_dp(count, steps, cache))
+# end = time.time()
+# print(cache)
+# print("flexible DP: --- %.4f seconds ---" % (end - start))
+# 
+# # flexable iteritave with dp
+# start = time.time()
+# print(staircase_multi_iter(count, steps))
+# end = time.time()
+# print("flexible iter DP: --- %.4f seconds ---" % (end - start))
+# 
+# #test_staircase()
+# 
