@@ -10,5 +10,17 @@ give 3.
 You can modify the input array in-place.
 """
 
-def find_integer():
-    pass
+def find_integer(arr):
+    return -1
+
+
+def test():
+    suits = [ ([3, 4, -1, 1], 2), ([1, 2, 0], 3) ]
+    for (param, expected) in suits:
+        ret = find_integer(param)
+        print(f'expected = {expected}, actual = {ret}')
+
+
+test()
+
+
