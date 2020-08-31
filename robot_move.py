@@ -15,6 +15,7 @@ def dp(m, n):
     memo[(m, n)] = result
     return result
 
+# this one is not done yet
 def dp2(M, N):
     V = { (1,1): 1 }
     for m in range(1, M + 1):
@@ -33,7 +34,7 @@ def dp2(M, N):
     return V[(M,N)]
 
 
-cases = [(5,6), (6,5), (6,6), (2,7), (3,6), (3,7)]
+cases = [(5,6), (6,5), (6,6), (2,7), (3,6), (3,7), (100, 100)]
 for (m, n) in cases:
     memo = {}
     result = dp(m, n)
