@@ -19,6 +19,31 @@ We can get the maximum profit by scheduling jobs 1 and 4.
 Note that there is longer schedules possible Jobs 1, 2 and 3 
 but the profit with this schedule is 20+50+100 which is less than 250.
 """
+from collections import namedtuple
 
-def wis():
-    pass
+def wis(input):
+    end_sorted = sorted(jobs, key=lambda j: j.start)
+    print(end_sorted)
+    # O(n^2) to generate compatible sets
+    comp_sets = { j: [i for i in jobs if i.start >= j.finish] for j in jobs }
+    #print(finish_arr)
+    print(comp_sets)
+
+    def dp(jobs):
+        if not jobs:
+            return 0
+        first = jobs[0]
+        return max(first.val + dp(comp_sets[first]), dp(jobs[1:]))
+
+    return dp(end_sorted)
+
+
+Job = namedtuple('Job', 'start finish val')
+job1 = Job(1, 2, 50)
+job2 = Job(3, 5, 20)
+job3 = Job(6, 19, 100)
+job4 = Job(2, 100, 200)
+jobs = [job1, job2, job3, job4]
+
+ret = wis(jobs)
+print(f'Max value: {ret} for jobs {jobs}')
