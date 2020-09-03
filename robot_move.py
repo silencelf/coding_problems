@@ -15,7 +15,7 @@ def dp(m, n):
     memo[(m, n)] = result
     return result
 
-# this is slow
+# this one is not done yet
 def dp2(M, N):
     V = { (1,1): 1 }
     for m in range(1, M + 1):
@@ -47,7 +47,7 @@ def dp3(M, N):
             V[(n, m - n)] = V[(n-1, m - n)] + V[(n, m-n-1)]
     return V[(M,N)]
 
-cases = [(5,5), (5,6), (6,5), (6,6), (2,7), (3,6), (3,7), (1000, 1000)]
+cases = [(5,6), (6,5), (6,6), (2,7), (3,6), (3,7), (100, 100)]
 for (m, n) in cases:
     memo = {}
     result = dp3(m, n)
