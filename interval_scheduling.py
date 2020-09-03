@@ -21,6 +21,8 @@ but the profit with this schedule is 20+50+100 which is less than 250.
 """
 from collections import namedtuple
 
+Job = namedtuple('Job', 'start finish val')
+
 def wis(input):
     end_sorted = sorted(jobs, key=lambda j: j.start)
     print(end_sorted)
@@ -38,7 +40,6 @@ def wis(input):
     return dp(end_sorted)
 
 
-Job = namedtuple('Job', 'start finish val')
 job1 = Job(1, 2, 50)
 job2 = Job(3, 5, 20)
 job3 = Job(6, 19, 100)
