@@ -28,9 +28,7 @@ def wis(input):
     end_sorted = sorted(input, key=attrgetter('finish'))
     print(end_sorted)
     # O(n^2) to generate compatible sets
-    comp_sets = { j: [i for i in end_sorted if i.start >= j.finish] for j in
-            end_sorted }
-    #print(finish_arr)
+    comp_sets = { j: [i for i in end_sorted if i.start >= j.finish] for j in end_sorted }
     print(comp_sets)
 
     def dp(jobs):
@@ -44,7 +42,6 @@ def wis(input):
 #            return 0
 #        first = jobs[0]
 #        return max(first.val + dp2(comp_sets[first]), dp2(jobs, i + 1))
-
     return dp(end_sorted)
 
 
@@ -56,7 +53,7 @@ def tests():
     jobs = [job1, job2, job3, job4]
 
     ret = wis(jobs)
-    print(f'Max value: {ret} for jobs {jobs}')
+    print(f'Max value: {ret} for {jobs}')
 
     jobs = [ Job(1, 2, 50),
             Job(3, 5, 20),
