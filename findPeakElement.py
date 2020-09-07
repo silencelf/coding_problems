@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 class Solution:
     def findPeakElement(self, nums):
         if len(nums) == 1:
