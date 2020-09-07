@@ -14,9 +14,30 @@ Input: "cbbd"
 Output: "bb"
 """
 
-def lps(s):
-	print(s)
-
-
+class Solution:
+    lo = 0
+    longest = 0
+    def longestPalindrome(self, s: str) -> str:
+        for i in range(len(s)):
+            self.extend(s, i, i)
+            self.extend(s, i, i + 1)
+        return s[self.lo:self.lo + self.longest]
+    
+    def extend(self, s, j, k):
+        while j >= 0 and k < len(s) and s[j] == s[k]:
+            j -= 1
+            k += 1
+        if k - j - 1 > self.longest:
+            self.lo = j + 1
+            self.longest = k -j - 1
+# tests
+sol = Solution()
 s = "babad"
-lps(s)
+ret = sol.longestPalindrome(s)
+print(ret)
+s = "aaabbbb"
+ret = sol.longestPalindrome(s)
+print(ret)
+s = "aa"
+ret = sol.longestPalindrome(s)
+print(ret)
