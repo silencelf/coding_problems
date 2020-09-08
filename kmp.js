@@ -10,8 +10,10 @@ class Solution {
       if (text[i] === pattern[j]) {
         i++;
         j++;
-      }  else {
-        j = lps[j] + 1;
+      } else if (j) {
+        j = lps[j - 1];
+      } else {
+        i++;
       }
     }
 
@@ -47,26 +49,25 @@ class Solution {
   test() {
     let txt = 'AAAAABAAABA';
     let pat = 'AAAA';
+    let result = null;
 
-    let lps = this.buildLPS(pat);
-    console.log(`lps of ${pat} is ${lps}`);
+    result = this.kmp(txt, pat);
+    console.log(`find ${pat} in ${txt}: ${result}`);
 
-    // [0, 1, 0, 1, 2, 0, 1, 2, 3, 4, 5]
-    pat = "AABAACAABAA";
-    lps = this.buildLPS(pat);
-    console.log(`lps of ${pat} is ${lps}`);
+    txt = 'hello';
+    pat = 'll';
+    result = this.kmp(txt, pat);
+    console.log(`find ${pat} in ${txt}: ${result}`);
 
-    // [0, 1, 2, 0, 1, 2, 3, 3, 3, 4]
-    pat = "AAACAAAAAC";
-    lps = this.buildLPS(pat);
-    console.log(`lps of ${pat} is ${lps}`);
+    txt = 'abaaa';
+    pat = 'abb';
+    result = this.kmp(txt, pat);
+    console.log(`find ${pat} in ${txt}: ${result}`);
 
-    // [0, 1, 2, 0, 1, 2, 3]
-    pat = "AAABAAA";
-    lps = this.buildLPS(pat);
-    console.log(`lps of ${pat} is ${lps}`);
+    txt = 'mississippi';
+    pat = 'issip';
 
-    const result = this.kmp(txt, pat);
+    result = this.kmp(txt, pat);
     console.log(`find ${pat} in ${txt}: ${result}`);
   }
 }
