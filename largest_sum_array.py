@@ -42,7 +42,15 @@ Constraints:
 """
 
 class Solution:
-    def maxSubArray(self, nums: List[int]) -> int:
+    def maxSubArray(self, nums) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        for i in range(1, len(nums)):
+            if nums[i -1] > 0:
+                nums[i] += nums[i - 1]
+        return max(nums)
+
+    def maxSubArray_naive(self, nums) -> int:
         if len(nums) == 1:
             return nums[0]
         m = None
@@ -52,3 +60,32 @@ class Solution:
                 if m == None or m < s:
                     m = s
         return m
+
+def tests():
+    s = Solution()
+    nums = [-2,1,-3,4,-1,2,1,-5,4]
+    expected =  6
+    ret = s.maxSubArray(nums)
+    print(f'input {nums}, expected: {expected}, actual: {ret}')
+
+    nums = [1]
+    expected =  1
+    ret = s.maxSubArray(nums)
+    print(f'input {nums}, expected: {expected}, actual: {ret}')
+
+    nums = [0]
+    expected =  0
+    ret = s.maxSubArray(nums)
+    print(f'input {nums}, expected: {expected}, actual: {ret}')
+
+    nums = [-1]
+    expected =  -1
+    ret = s.maxSubArray(nums)
+    print(f'input {nums}, expected: {expected}, actual: {ret}')
+
+    nums = [-2147483647]
+    expected =  -2147483647
+    ret = s.maxSubArray(nums)
+    print(f'input {nums}, expected: {expected}, actual: {ret}')
+
+tests()
