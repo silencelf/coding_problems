@@ -37,8 +37,6 @@ Constraints:
 [-2,1,-3,4,-1,2,1,-5,4]
 
 [-2,1,-3,(4,-1,2,1),-5,4]
-
-
 """
 
 class Solution:
@@ -49,6 +47,20 @@ class Solution:
             if nums[i -1] > 0:
                 nums[i] += nums[i - 1]
         return max(nums)
+
+    def maxSubArray2(self, nums) -> int:
+        memo = []
+        def dp(nums, i):
+            if i == 0:
+                memo.append(nums[i])
+                return nums[0]
+            prefix = dp(nums, i - 1)
+            val = prefix + nums[i] if prefix > 0 else nums[i]
+            memo.append(val)
+            return val
+        dp(nums, len(nums) - 1)
+        #breakpoint()
+        return max(memo)
 
     def maxSubArray_naive(self, nums) -> int:
         if len(nums) == 1:
@@ -63,29 +75,30 @@ class Solution:
 
 def tests():
     s = Solution()
+    action = s.maxSubArray2
     nums = [-2,1,-3,4,-1,2,1,-5,4]
     expected =  6
-    ret = s.maxSubArray(nums)
+    ret = action(nums)
     print(f'input {nums}, expected: {expected}, actual: {ret}')
 
     nums = [1]
     expected =  1
-    ret = s.maxSubArray(nums)
+    ret = action(nums)
     print(f'input {nums}, expected: {expected}, actual: {ret}')
 
     nums = [0]
     expected =  0
-    ret = s.maxSubArray(nums)
+    ret = action(nums)
     print(f'input {nums}, expected: {expected}, actual: {ret}')
 
     nums = [-1]
     expected =  -1
-    ret = s.maxSubArray(nums)
+    ret = action(nums)
     print(f'input {nums}, expected: {expected}, actual: {ret}')
 
     nums = [-2147483647]
     expected =  -2147483647
-    ret = s.maxSubArray(nums)
+    ret = action(nums)
     print(f'input {nums}, expected: {expected}, actual: {ret}')
 
 tests()
