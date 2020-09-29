@@ -3,6 +3,8 @@
 class Solution {
   kmp(text, pattern) {
     const lps = this.buildLPS(pattern);
+    console.log('longest prefix suffix:');
+    console.log(lps)
 
     let i = 0;
     let j = 0;
