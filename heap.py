@@ -7,7 +7,7 @@ class Heap:
     def __init__(self, arr):
         self.arr = arr
         self.__buildHeap__(arr)
-    
+
     def __str__(self):
         return str(self.arr)
 

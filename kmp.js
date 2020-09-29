@@ -17,7 +17,7 @@ class Solution {
       }
     }
 
-    if (j === pattern.length) 
+    if (j === pattern.length)
       return i - j;
 
     return -1;
