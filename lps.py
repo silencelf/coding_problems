@@ -13,7 +13,6 @@ Example 2:
 Input: "cbbd"
 Output: "bb"
 """
-
 class Solution:
     lo = 0
     longest = 0
@@ -22,7 +21,7 @@ class Solution:
             self.extend(s, i, i)
             self.extend(s, i, i + 1)
         return s[self.lo:self.lo + self.longest]
-    
+
     def extend(self, s, j, k):
         while j >= 0 and k < len(s) and s[j] == s[k]:
             j -= 1

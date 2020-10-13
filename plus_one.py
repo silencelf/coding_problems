@@ -32,22 +32,36 @@ Constraints:
 """
 
 class Solution:
-    def plusOne(self, digits: List[int]) -> List[int]:
-       pass
-
+    def plusOne(self, digits):
+        result = []
+        up = 1
+        for d in reversed(digits):
+            current = d + up
+            if current < 10:
+                result.append(current)
+                up = 0
+            else:
+                this = (current) % 10
+                up = current // 10
+                result.append(this)
+        if up > 0:
+            result.append(up)
+        return list(reversed(result))
 
 
 testSuites = [
     ([1,2,3], [1,2,4]),
     ([4,3,2,1], [4,3,2,2]),
     ([0], [1]),
+    ([8, 9], [9, 0]),
     ([9, 9], [1, 0, 0])
 ]
 
 s = Solution()
 for case in testSuites:
-    ret = s.pluseOne(case[0])
-    if ret == s[1]:
+    ret = s.plusOne(case[0])
+    print(ret)
+    if ret == case[1]:
         print('case passed.')
     else:
         print(f'case {case[0]} failed.')
